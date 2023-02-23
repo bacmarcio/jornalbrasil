@@ -61,8 +61,9 @@ if (isset($CategoriasInstanciada)) {
 			/// FILTROS
 
 			$nCampos = 0;
-
-			$sql = "";
+			$sql = '';
+			$sqlOrdem = '';
+			$sqlLimite = '';
 
 			if ($idMenu <> '') {
 
@@ -96,14 +97,14 @@ if (isset($CategoriasInstanciada)) {
 
 
 			/// ORDEM		
-			$sqlOrdem = "";
+
 			if ($orderBy <> '') {
 
 				$sqlOrdem = " order by {$orderBy}";
 			}
 
 
-			$sqlLimite = '';
+
 			if ($limite <> '') {
 
 				$sqlLimite = " limit 0,{$limite}";
@@ -173,7 +174,7 @@ if (isset($CategoriasInstanciada)) {
 
 
 
-			if ($_POST['acao'] == 'addCategorias') {
+			if (isset($_POST['acao']) && $_POST['acao'] == 'addCategorias') {
 
 
 
@@ -247,7 +248,7 @@ if (isset($CategoriasInstanciada)) {
 		function editar($redireciona = '')
 		{
 
-			if ($_POST['acao'] == 'editarCategorias') {
+			if (isset($_POST['acao']) && $_POST['acao'] == 'editarCategorias') {
 
 
 
@@ -299,7 +300,7 @@ if (isset($CategoriasInstanciada)) {
 		function excluir()
 		{
 
-			if ($_GET['acao'] == 'excluirCategorias') {
+			if (isset($_GET['acao']) && $_GET['acao'] == 'excluirCategorias') {
 
 
 

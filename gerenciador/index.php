@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include('../data/acesso.class.php');
 
@@ -14,53 +14,54 @@ $acesso->logout();
 
 <html lang="pt-br">
 
-    <head>
+<head>
 
-        <title>Administrativo</title>
+	<title>Administrativo</title>
 
-        <meta charset="UTF-8">
+	<meta charset="UTF-8">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="css/style.css" rel="stylesheet">
-
-        
-
-        <!-- Ultima versão do bootstrap CSS, JS & FONT AWESOME -->
-
-        <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css"> 
-
-        
-
-    </head>
-
-    <body>
-
-<?php include('header.php');?>
+	<link href="css/style.css" rel="stylesheet">
 
 
 
-    <!--//----CONTEUDO---//-->
+	<!-- Ultima versão do bootstrap CSS, JS & FONT AWESOME -->
 
-    <main class="container">
+	<link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-    <br><br><br>
-
-<h1>Gerenciador</h1>
-
-<hr />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 
 
 
-<?php //if ($db) : ?>
+</head>
+
+<body>
+
+	<?php include('header.php'); ?>
 
 
 
-<div class="row">
+	<!--//----CONTEUDO---//-->
 
-	<!--<div class="col-xs-6 col-sm-3 col-md-2">
+	<main class="container">
+
+		<br><br><br>
+
+		<h1>Gerenciador</h1>
+
+		<hr />
+
+
+
+		<?php //if ($db) : 
+		?>
+
+
+
+		<div class="row">
+
+			<!--<div class="col-xs-6 col-sm-3 col-md-2">
 
 		<a href="add-cliente.php" class="btn btn-primary">
 
@@ -86,7 +87,7 @@ $acesso->logout();
 
 
 
-	<!--<div class="col-xs-6 col-sm-3 col-md-2">
+			<!--<div class="col-xs-6 col-sm-3 col-md-2">
 
 		<a href="colaboradores.php" class="btn btn-primary">
 
@@ -136,7 +137,7 @@ $acesso->logout();
 
 	</div>-->
 
-	<!-- <div class="col-xs-6 col-sm-3 col-md-2">
+			<!-- <div class="col-xs-6 col-sm-3 col-md-2">
 
 		<a href="colunistas.php" class="btn btn-primary">
 
@@ -160,7 +161,7 @@ $acesso->logout();
 
 	</div> -->
 
-	<!-- <div class="col-xs-6 col-sm-3 col-md-2">
+			<!-- <div class="col-xs-6 col-sm-3 col-md-2">
 
 		<a href="artigos.php" class="btn btn-primary">
 
@@ -184,105 +185,105 @@ $acesso->logout();
 
 	</div> -->
 
-	<div class="col-xs-6 col-sm-3 col-md-2">
+			<div class="col-xs-6 col-sm-3 col-md-2">
 
-		<a href="textos.php" class="btn btn-primary">
+				<a href="textos.php" class="btn btn-primary">
 
-			<div class="row">
+					<div class="row">
 
-				<div class="col-xs-12 text-center">
+						<div class="col-xs-12 text-center">
 
-					<i class="fa fa-file-text fa-5x"></i>
+							<i class="fa fa-file-text fa-5x"></i>
 
-				</div>
+						</div>
 
-				<div class="col-xs-12 text-center">
+						<div class="col-xs-12 text-center">
 
-					<p>Textos</p>
+							<p>Textos</p>
 
-				</div>
+						</div>
 
-			</div>
+					</div>
 
-		</a>
-
-	</div>
-
-	<div class="col-xs-6 col-sm-3 col-md-2">
-
-		<a href="noticias.php" class="btn btn-primary">
-
-			<div class="row">
-
-				<div class="col-xs-12 text-center">
-
-					<i class="fa fa-book fa-5x"></i>
-
-				</div>
-
-				<div class="col-xs-12 text-center">
-
-					<p>Notícias</p>
-
-				</div>
+				</a>
 
 			</div>
-
-		</a>
-
-	</div>
-
-	
 
 			<div class="col-xs-6 col-sm-3 col-md-2">
 
-		<a href="apoiadores.php" class="btn btn-primary">
+				<a href="noticias.php" class="btn btn-primary">
 
-			<div class="row">
+					<div class="row">
 
-				<div class="col-xs-12 text-center">
+						<div class="col-xs-12 text-center">
 
-					<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+							<i class="fa fa-book fa-5x"></i>
 
-				</div>
+						</div>
 
-				<div class="col-xs-12 text-center">
+						<div class="col-xs-12 text-center">
 
-					<p>Apoiadores</p>
+							<p>Notícias</p>
 
-				</div>
+						</div>
 
-			</div>
+					</div>
 
-		</a>
-
-	</div>
-
-		<div class="col-xs-6 col-sm-3 col-md-2">
-
-		<a href="banners.php" class="btn btn-primary">
-
-			<div class="row">
-
-				<div class="col-xs-12 text-center">
-
-					<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="col-xs-12 text-center">
-
-					<p>Banner</p>
-
-				</div>
+				</a>
 
 			</div>
 
-		</a>
 
-	</div>
 
-	<!--<div class="col-xs-6 col-sm-3 col-md-2">
+			<div class="col-xs-6 col-sm-3 col-md-2">
+
+				<a href="apoiadores.php" class="btn btn-primary">
+
+					<div class="row">
+
+						<div class="col-xs-12 text-center">
+
+							<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+
+						</div>
+
+						<div class="col-xs-12 text-center">
+
+							<p>Apoiadores</p>
+
+						</div>
+
+					</div>
+
+				</a>
+
+			</div>
+
+			<div class="col-xs-6 col-sm-3 col-md-2">
+
+				<a href="banners.php" class="btn btn-primary">
+
+					<div class="row">
+
+						<div class="col-xs-12 text-center">
+
+							<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+
+						</div>
+
+						<div class="col-xs-12 text-center">
+
+							<p>Banner</p>
+
+						</div>
+
+					</div>
+
+				</a>
+
+			</div>
+
+			<!--<div class="col-xs-6 col-sm-3 col-md-2">
 
 		<a href="conteudos.php?id_menu=1" class="btn btn-primary">
 
@@ -330,43 +331,43 @@ $acesso->logout();
 
 	</div>-->
 
-	
 
-	
 
-</div>
+
+
+		</div>
 
 		<hr>
 
 		<div class="row">
 
-	
 
-	<div class="col-xs-6 col-sm-3 col-md-2">
 
-		<a href="feeds.php" class="btn btn-primary">
+			<div class="col-xs-6 col-sm-3 col-md-2">
 
-			<div class="row">
+				<a href="feeds.php" class="btn btn-primary">
 
-				<div class="col-xs-12 text-center">
+					<div class="row">
 
-					<i class="fa fa-rss fa-5x" aria-hidden="true"></i>
+						<div class="col-xs-12 text-center">
 
-				</div>
+							<i class="fa fa-rss fa-5x" aria-hidden="true"></i>
 
-				<div class="col-xs-12 text-center">
+						</div>
 
-					<p>Feeds</p>
+						<div class="col-xs-12 text-center">
 
-				</div>
+							<p>Feeds</p>
+
+						</div>
+
+					</div>
+
+				</a>
 
 			</div>
 
-		</a>
-
-	</div>
-
-		<!-- <div class="col-xs-6 col-sm-3 col-md-2">
+			<!-- <div class="col-xs-6 col-sm-3 col-md-2">
 
 		<a href="apoiadores.php" class="btn btn-primary">
 
@@ -390,102 +391,98 @@ $acesso->logout();
 
 	</div> -->
 
-	<div class="col-xs-6 col-sm-3 col-md-2">
+			<div class="col-xs-6 col-sm-3 col-md-2">
 
-		<a href="videos.php" class="btn btn-primary">
+				<a href="videos.php" class="btn btn-primary">
 
-			<div class="row">
+					<div class="row">
 
-				<div class="col-xs-12 text-center">
+						<div class="col-xs-12 text-center">
 
-					<i class="fa fa-file-video-o fa-5x" aria-hidden="true"></i>
+							<i class="fa fa-file-video-o fa-5x" aria-hidden="true"></i>
 
-				</div>
+						</div>
 
-				<div class="col-xs-12 text-center">
+						<div class="col-xs-12 text-center">
 
-					<p>Videos</p>
+							<p>Videos</p>
 
-				</div>
+						</div>
 
-			</div>
+					</div>
 
-		</a>
-
-	</div>
-
-	<div class="col-xs-6 col-sm-3 col-md-2">
-
-		<a href="newsletters.php" class="btn btn-primary">
-
-			<div class="row">
-
-				<div class="col-xs-12 text-center">
-
-					<i class="fa fa-newspaper-o fa-5x" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="col-xs-12 text-center">
-
-					<p>Newsletter</p>
-
-				</div>
+				</a>
 
 			</div>
 
-		</a>
+			<div class="col-xs-6 col-sm-3 col-md-2">
 
-	</div>
+				<a href="newsletters.php" class="btn btn-primary">
 
-	<div class="col-xs-6 col-sm-3 col-md-2">
+					<div class="row">
 
-		<a href="index.php?acao=logout" class="btn btn-danger">
+						<div class="col-xs-12 text-center">
 
-			<div class="row">
+							<i class="fa fa-newspaper-o fa-5x" aria-hidden="true"></i>
 
-				<div class="col-xs-12 text-center">
+						</div>
 
-					<i class="fa fa-times fa-5x"></i>
+						<div class="col-xs-12 text-center">
 
-				</div>
+							<p>Newsletter</p>
 
-				<div class="col-xs-12 text-center">
+						</div>
 
-					<p>Sair</p>
+					</div>
 
-				</div>
+				</a>
 
 			</div>
 
-		</a>
+			<div class="col-xs-6 col-sm-3 col-md-2">
 
-	</div>
+				<a href="index.php?acao=logout" class="btn btn-danger">
 
-</div>
+					<div class="row">
+
+						<div class="col-xs-12 text-center">
+
+							<i class="fa fa-times fa-5x"></i>
+
+						</div>
+
+						<div class="col-xs-12 text-center">
+
+							<p>Sair</p>
+
+						</div>
+
+					</div>
+
+				</a>
+
+			</div>
+
+		</div>
 
 
 
-</main> 
+	</main>
 
- <!--//----FIM DO CONTEUDO---//-->
+	<!--//----FIM DO CONTEUDO---//-->
 
 	<hr>
 
-	
 
 
 
-<?php include('footer.php'); ?>
 
-    </body>
+	<?php include('footer.php'); ?>
 
-    <!--Ultima versão do jquery-->
+</body>
 
-    <script src="//code.jquery.com/jquery.js"></script>
+<!--Ultima versão do jquery-->
 
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    <script src="js/main.js"></script>
 
 </html>

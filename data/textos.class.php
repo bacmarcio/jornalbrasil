@@ -44,6 +44,10 @@ class Textos
 
 		$nCampos = 0;
 		$sql = '';
+		$sqlOrdem = '';
+		$sqlLimite = '';
+
+		$sql = '';
 		if ($id <> '') {
 			$sql .= " and id = ?";
 			$nCampos++;
@@ -73,7 +77,7 @@ class Textos
 
 	function editar()
 	{
-		if ($_POST['acao'] == 'editarTexto') {
+		if (isset($_POST['acao']) && $_POST['acao']  == 'editarTexto') {
 			try {
 				$sql = "UPDATE textos SET titulo=?, texto=?, foto=? WHERE id=?";
 				$stm = $this->pdo->prepare($sql);

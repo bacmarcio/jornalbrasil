@@ -3,11 +3,8 @@
 $NoticiasInstanciada = '';
 
 if (isset($NoticiasInstanciada)) {
-
 	if (file_exists('Connections/conexao.php')) {
-
 		include('Connections/con-pdo.php');
-
 		include_once('funcoes.php');
 	} else {
 
@@ -50,6 +47,8 @@ if (isset($NoticiasInstanciada)) {
 
 			$nCampos = 0;
 			$sql = '';
+			$sqlOrdem = '';
+			$sqlLimite = '';
 
 			if ($id <> '') {
 
@@ -298,8 +297,8 @@ if (isset($NoticiasInstanciada)) {
 		{
 
 			global $conInstanciada, $InfoSiteInstanciada;
-			$_POST['acao'] = '';
-			if ($_POST['acao'] == 'addNoticias') {
+
+			if (isset($_POST['acao']) && $_POST['acao'] == 'addNoticias') {
 
 				try {
 
@@ -375,7 +374,7 @@ if (isset($NoticiasInstanciada)) {
 		function editar($redireciona = '')
 		{
 
-			if ($_POST['acao'] == 'editarNoticias') {
+			if (isset($_POST['acao']) && $_POST['acao'] == 'editarNoticias') {
 
 				try {
 
@@ -441,7 +440,7 @@ if (isset($NoticiasInstanciada)) {
 		function excluir()
 		{
 
-			if ($_GET['acao'] == 'excluirNoticias') {
+			if (isset($_GET['acao']) && $_GET['acao'] == 'excluirNoticias') {
 
 				// deleta foto
 

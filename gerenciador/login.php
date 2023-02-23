@@ -1,9 +1,18 @@
 <?php
 include('../data/acesso.class.php');
 $acesso = Acesso::getInstance(Conexao::getInstance());
-// $_POST['login'] = '';
-// $_POST['senha'] = '';
-$acesso->login($_POST['login'], $_POST['senha']);
+
+if (!empty($_POST['acao'] && $_POST['acao'] == 'login')) {
+
+  if (isset($_POST['login'])) {
+    $login = $_POST['login'];
+  }
+  if (isset($_POST['senha'])) {
+    $senha = $_POST['senha'];
+  }
+
+  $acesso->login($login, $senha);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -50,7 +59,7 @@ $acesso->login($_POST['login'], $_POST['senha']);
         <div class="col-md-12">
           <button type="submit" class="btn btn-primary">Confirmar</button>
           <!--      <a href="index.php" class="btn btn-default">Cancelar</a>-->
-
+          <input type="hidden" name="acao" value="login">
         </div>
       </div>
     </form>
@@ -58,14 +67,12 @@ $acesso->login($_POST['login'], $_POST['senha']);
   </main>
 
   <!--//----FIM DO CONTEUDO---//-->
-  <hr>
+
 
   <?php include('footer.php'); ?>
 
 </body>
 <!--Ultima versão do jquery-->
-<script src="//code.jquery.com/jquery.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
+
 
 </html>

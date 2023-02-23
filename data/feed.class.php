@@ -1,120 +1,119 @@
 <?php
 
-@ session_start();
+@session_start();
+$FeedInstanciada = '';
 
 
+if (isset($FeedInstanciada)) {
 
-if($FeedInstanciada == '') {
+	if (file_exists('Connections/conexao.php')) {
 
-	if(file_exists('Connections/conexao.php')) {
+		include_once('Connections/con-pdo.php');
 
-		include('Connections/con-pdo.php');
-
-		include('funcoes.php');
-
+		include_once('funcoes.php');
 	} else {
 
 		require_once('../Connections/con-pdo.php');
 
-		include('../funcoes.php');
-
+		include_once('../funcoes.php');
 	}
 
-	
 
-	class Feed {
 
-		
-
-		private $pdo = null;  
+	class Feed
+	{
 
 
 
-		private static $Feed = null; 
+		private $pdo = null;
 
 
 
-		private function __construct($conexao){  
+		private static $Feed = null;
 
-			$this->pdo = $conexao;  
 
+
+		private function __construct($conexao)
+		{
+
+			$this->pdo = $conexao;
 		}
 
-	  
 
-		public static function getInstance($conexao){   
 
-			if (!isset(self::$Feed)):    
+		public static function getInstance($conexao)
+		{
 
-				self::$Feed = new Feed($conexao);   
+			if (!isset(self::$Feed)) :
+
+				self::$Feed = new Feed($conexao);
 
 			endif;
 
-			return self::$Feed;    
-
+			return self::$Feed;
 		}
 
-		
 
-		
 
-		function rsDados($id='', $orderBy='', $limite='') {
 
-			
+
+		function rsDados($id = '', $orderBy = '', $limite = '')
+		{
+
+
 
 			/// FILTROS
 
 			$nCampos = 0;
+			$sql = '';
+			$sqlOrdem = '';
+			$sqlLimite = '';
 
-			
 
-			if($id <> '') {
 
-				$sql .= " and id = ?"; 
+			if ($id <> '') {
+
+				$sql .= " and id = ?";
 
 				$nCampos++;
 
 				$campo[$nCampos] = $id;
-
 			}
 
-			
+
 
 			/// ORDEM		
 
-			if($orderBy <> '') {
+			if ($orderBy <> '') {
 
 				$sqlOrdem = " order by {$orderBy}";
-
 			}
 
-			
 
-			if($limite <> '') {
+
+			if ($limite <> '') {
 
 				$sqlLimite = " limit 0,{$limite}";
-
 			}
 
-			
 
-			try{   
+
+			try {
 
 				$sql = "SELECT * FROM feeds where 1=1 $sql $sqlOrdem $sqlLimite";
 
 				$stm = $this->pdo->prepare($sql);
 
-				
 
-				for($i=1; $i<=$nCampos; $i++) {
+
+				for ($i = 1; $i <= $nCampos; $i++) {
 
 					$stm->bindValue($i, $campo[$i]);
-
 				}
 
-				
 
-				if($_GET['busca'] <> '') {
+
+				if ($_GET['busca'] <> '') {
 
 					$stm->bindValue($i, "%{$_GET['busca']}%");
 
@@ -125,10 +124,9 @@ if($FeedInstanciada == '') {
 					$i++;
 
 					$stm->bindValue($i, "%{$_GET['busca']}%");
-
 				}
 
-				
+
 
 				$stm->execute();
 
@@ -138,80 +136,69 @@ if($FeedInstanciada == '') {
 
 				//print_r($rsDados);
 
-				if($id <> '' or $limite == 1) {
+				if ($id <> '' or $limite == 1) {
 
-					return($rsDados[0]);
-
+					return ($rsDados[0]);
 				} else {
 
-					return($rsDados);
-
+					return ($rsDados);
 				}
+			} catch (PDOException $erro) {
 
-			} catch(PDOException $erro){   
-
-				echo $erro->getMessage(); 
-
+				echo $erro->getMessage();
 			}
-
 		}
 
-		
 
-	
 
-		
 
-		function editar($redireciona='') {
 
-			if($_POST['acao'] == 'editarFeeds') {
 
-				
 
-					try{   
+		function editar($redireciona = '')
+		{
 
-						$sql = "UPDATE feeds SET titulo=?, embed=?, descricao=?, data=?, fonte=? WHERE id=?"; 
+			if (isset($_POST['acao']) && $_POST['acao'] == 'editarFeeds') {
 
-						$stm = $this->pdo->prepare($sql);   
 
-						$stm->bindValue(1, $_POST['titulo']);   
 
-						$stm->bindValue(2, $_POST['embed']);   
+				try {
 
-						$stm->bindValue(3, $_POST['descricao']);   
+					$sql = "UPDATE feeds SET titulo=?, embed=?, descricao=?, data=?, fonte=? WHERE id=?";
 
-						$stm->bindValue(4, $_POST['data']);   
-						$stm->bindValue(5, $_POST['fonte']);   
+					$stm = $this->pdo->prepare($sql);
 
-						$stm->bindValue(6, $_POST['id']);   
+					$stm->bindValue(1, $_POST['titulo']);
 
-						$stm->execute(); 
+					$stm->bindValue(2, $_POST['embed']);
 
-						
+					$stm->bindValue(3, $_POST['descricao']);
 
-						
+					$stm->bindValue(4, $_POST['data']);
+					$stm->bindValue(5, $_POST['fonte']);
 
-					} catch(PDOException $erro){
+					$stm->bindValue(6, $_POST['id']);
 
-						echo $erro->getMessage(); 
+					$stm->execute();
+				} catch (PDOException $erro) {
 
-					}
+					echo $erro->getMessage();
+				}
 
-					
 
-				
+
+
 
 				$linkRedireciona = "feeds.php";
 
-				
 
-				if($redireciona <> '') {
+
+				if ($redireciona <> '') {
 
 					$linkRedireciona = $redireciona;
-
 				}
 
-				
+
 
 				echo "	<script>
 
@@ -219,71 +206,65 @@ if($FeedInstanciada == '') {
 
 						</script>";
 
-						exit; 
-
-						
-
-						
-
+				exit;
 			}
-
 		}
 
 
-		function excluir() {
+		function excluir()
+		{
 
-			if($_GET['acao'] == 'excluir_feed') {
+			if (isset($_GET['acao']) && $_GET['acao'] == 'excluir_feed') {
 				// deleta foto
 
-				try{   
-					$sql = "DELETE FROM feeds WHERE id=? ";   
-					$stm = $this->pdo->prepare($sql);   
-					$stm->bindValue(1, $_GET['id']);   
+				try {
+					$sql = "DELETE FROM feeds WHERE id=? ";
+					$stm = $this->pdo->prepare($sql);
+					$stm->bindValue(1, $_GET['id']);
 					$stm->execute();
-				} catch(PDOException $erro){
-					echo $erro->getMessage(); 
+				} catch (PDOException $erro) {
+					echo $erro->getMessage();
 				}
 			}
 		}
 
-		function add($mensagemAlert='', $redireciona='') {
-			if($_POST['acao'] == 'add_feed') {
+		function add($mensagemAlert = '', $redireciona = '')
+		{
+			if (isset($_POST['acao']) && $_POST['acao'] == 'add_feed') {
 				try {
-					$sql = "INSERT INTO feeds (titulo, embed, descricao, data) VALUES (?, ?, ?, ?)";   
-					$stm = $this->pdo->prepare($sql);   
-					$stm->bindValue(1, $_POST['titulo']);   
+					$sql = "INSERT INTO feeds (titulo, embed, descricao, data) VALUES (?, ?, ?, ?)";
+					$stm = $this->pdo->prepare($sql);
+					$stm->bindValue(1, $_POST['titulo']);
 					$stm->bindValue(2, $_POST['embed']);
 					$stm->bindValue(3, $_POST['descricao']);
 					$stm->bindValue(4, $_POST['data']);
 					$stm->execute();
 					$idConteudo = $this->pdo->lastInsertId();
-				} catch(PDOException $erro){
-					echo $erro->getMessage(); 
+				} catch (PDOException $erro) {
+					echo $erro->getMessage();
 				}
 
-				if($mensagemAlert <> '') {
+				if ($mensagemAlert <> '') {
 					echo "	<script>
 							alert('{$mensagemAlert}');
 							</script>";
 				}
-			
+
 				$linkRedireciona = "feeds.php";
-				
-				if($redireciona <> '') {
+
+				if ($redireciona <> '') {
 					$linkRedireciona = $redireciona;
 				}
-				
+
 				echo "	<script>
 						window.location='{$linkRedireciona}';
 						</script>";
-						exit;
+				exit;
 			}
 		}
-
 	}
 
-	
+
 
 	$FeedInstanciada = 'S';
-
 }

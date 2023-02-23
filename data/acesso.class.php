@@ -42,22 +42,10 @@ class Acesso
 		}
 	}
 
-	function logout()
-	{
-		if ($_GET['acao'] == 'logout') {
-			unset($_SESSION['gerenciadorLogado']);
-			unset($_SESSION['dadosLogado']);
-			echo "	<script>
-						window.location='login.php'
-						</script>";
-			exit;
-		}
-	}
-
 	function login($login, $senha)
 	{
 
-		if ($login <> '' and $senha <> '') {
+		if (isset($login) && $login <> '' and isset($senha) && $senha <> '') {
 			try {
 				$sql = "SELECT * FROM admin where login = :login and senha = :senha";
 				$stm = $this->pdo->prepare($sql);
@@ -87,7 +75,17 @@ class Acesso
 		}
 	}
 
-
+	function logout()
+	{
+		if (isset($_GET['acao']) && $_GET['acao'] == 'logout') {
+			unset($_SESSION['gerenciadorLogado']);
+			unset($_SESSION['dadosLogado']);
+			echo "	<script>
+						window.location='login.php'
+						</script>";
+			exit;
+		}
+	}
 
 	function rsDados($login = '', $id = '')
 	{
@@ -123,11 +121,9 @@ class Acesso
 		}
 	}
 
-
-
 	function editar()
 	{
-		if ($_POST['acao'] == 'editarUser') {
+		if (isset($_POST['acao']) && $_POST['acao'] == 'editarUser') {
 			try {
 				$sql = "UPDATE admin SET login=?, senha=?, nome=?, email=? WHERE id=?";
 				$stm = $this->pdo->prepare($sql);

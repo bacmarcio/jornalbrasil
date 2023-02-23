@@ -1,179 +1,184 @@
 <?php
-@ session_start();
+@session_start();
 
-if($BannersColunistasInstanciada == '') {
-	if(file_exists('Connections/conexao.php')) {
+if (isset($BannersColunistasInstanciada)) {
+	if (file_exists('Connections/conexao.php')) {
 		include('Connections/con-pdo.php');
 		include('funcoes.php');
 	} else {
 		require_once('../Connections/con-pdo.php');
 		include('../funcoes.php');
 	}
-	
-	class BannersColunistas {
-		
-		private $pdo = null;  
 
-		private static $BannersColunistas = null; 
+	class BannersColunistas
+	{
 
-		private function __construct($conexao){  
-			$this->pdo = $conexao;  
+		private $pdo = null;
+
+		private static $BannersColunistas = null;
+
+		private function __construct($conexao)
+		{
+			$this->pdo = $conexao;
 		}
-	  
-		public static function getInstance($conexao){   
-			if (!isset(self::$BannersColunistas)):    
-				self::$BannersColunistas = new BannersColunistas($conexao);   
+
+		public static function getInstance($conexao)
+		{
+			if (!isset(self::$BannersColunistas)) :
+				self::$BannersColunistas = new BannersColunistas($conexao);
 			endif;
-			return self::$BannersColunistas;    
+			return self::$BannersColunistas;
 		}
-		
-		
-		function rsDados($id='', $idColunista='', $orderBy='', $limite='') {
-			
+
+
+		function rsDados($id = '', $idColunista = '', $orderBy = '', $limite = '')
+		{
+
 			/// FILTROS
 			$nCampos = 0;
-			
-			if($id <> '') {
-				$sql .= " and id = ?"; 
+			$sql = '';
+			$sqlOrdem = '';
+			$sqlLimite = '';
+
+			if ($id <> '') {
+				$sql .= " and id = ?";
 				$nCampos++;
 				$campo[$nCampos] = $id;
 			}
-			if($idColunista <> '') {
-				$sql .= " and id_colunista = ?"; 
+			if ($idColunista <> '') {
+				$sql .= " and id_colunista = ?";
 				$nCampos++;
 				$campo[$nCampos] = $idColunista;
 			}
-			
+
 			/// ORDEM		
-			if($orderBy <> '') {
+			if ($orderBy <> '') {
 				$sqlOrdem = " order by {$orderBy}";
 			}
-			
-			if($limite <> '') {
+
+			if ($limite <> '') {
 				$sqlLimite = " limit 0,{$limite}";
 			}
-			
-			try{   
+
+			try {
 				$sql = "SELECT * FROM banners_colunista where 1=1 $sql $sqlOrdem $sqlLimite";
 				$stm = $this->pdo->prepare($sql);
-				
-				for($i=1; $i<=$nCampos; $i++) {
+
+				for ($i = 1; $i <= $nCampos; $i++) {
 					$stm->bindValue($i, $campo[$i]);
 				}
-				
-				if($_GET['busca'] <> '') {
+
+				if ($_GET['busca'] <> '') {
 					$stm->bindValue($i, "%{$_GET['busca']}%");
 					$i++;
 					$stm->bindValue($i, "%{$_GET['busca']}%");
 					$i++;
 					$stm->bindValue($i, "%{$_GET['busca']}%");
 				}
-				
+
 				$stm->execute();
 				$rsDados = $stm->fetchAll(PDO::FETCH_OBJ);
 				//print_r($stm);
 				//print_r($rsDados);
-				if($id <> '' or $limite == 1) {
-					return($rsDados[0]);
+				if ($id <> '' or $limite == 1) {
+					return ($rsDados[0]);
 				} else {
-					return($rsDados);
+					return ($rsDados);
 				}
-			} catch(PDOException $erro){   
-				echo $erro->getMessage(); 
+			} catch (PDOException $erro) {
+				echo $erro->getMessage();
 			}
 		}
-		
-		function add($mensagemAlert='', $redireciona='') {
-			
-			if($_POST['acao'] == 'addBannersColunistas') {
-				
-				
-					try{
-					
-						$sql = "INSERT INTO banners_colunista (titulo, foto, id_colunista, ordem) VALUES (?, ?, ?, ?)";   
-						$stm = $this->pdo->prepare($sql);   
-						$stm->bindValue(1, $_POST['titulo']);   
-						$stm->bindValue(2, upload('foto', '../img_conteudos', 'N'));
-						$stm->bindValue(3, $_POST['id_colunista']);
-						$stm->bindValue(4, $_POST['ordem']);
-						$stm->execute();
-						$idConteudo = $this->pdo->lastInsertId();
-						
-						/////////////
-					} catch(PDOException $erro){
-						echo $erro->getMessage(); 
-					}
-					
-				
-				
-				if($mensagemAlert <> '') {
+
+		function add($mensagemAlert = '', $redireciona = '')
+		{
+
+			if (isset($_POST['acao']) && $_POST['acao'] == 'addBannersColunistas') {
+
+
+				try {
+
+					$sql = "INSERT INTO banners_colunista (titulo, foto, id_colunista, ordem) VALUES (?, ?, ?, ?)";
+					$stm = $this->pdo->prepare($sql);
+					$stm->bindValue(1, $_POST['titulo']);
+					$stm->bindValue(2, upload('foto', '../img_conteudos', 'N'));
+					$stm->bindValue(3, $_POST['id_colunista']);
+					$stm->bindValue(4, $_POST['ordem']);
+					$stm->execute();
+					$idConteudo = $this->pdo->lastInsertId();
+
+					/////////////
+				} catch (PDOException $erro) {
+					echo $erro->getMessage();
+				}
+
+
+
+				if ($mensagemAlert <> '') {
 					echo "	<script>
 							alert('{$mensagemAlert}');
 							</script>";
 				}
-				
+
 				$linkRedireciona = "bannersColunista.php?id_colunista={$_POST['id_colunista']}";
-				
-				if($redireciona <> '') {
+
+				if ($redireciona <> '') {
 					$linkRedireciona = $redireciona;
 				}
-				
+
 				echo "	<script>
 						window.location='{$linkRedireciona}';
 						</script>";
-						exit;
+				exit;
 			}
 		}
-		
-		function editar($redireciona='') {
-			if($_POST['acao'] == 'editarBannersColunistas') {
-				
-					try{   
-						$sql = "UPDATE banners_colunista SET titulo=?, foto=?, id_colunista=?, ordem=? WHERE id=?"; 
-						$stm = $this->pdo->prepare($sql);   
-						$stm->bindValue(1, $_POST['titulo']);   
-						$stm->bindValue(2, upload('foto', '../img_conteudos', 'N'));
-						$stm->bindValue(3, $_POST['id_colunista']);   
-						$stm->bindValue(4, $_POST['ordem']);   
-						$stm->bindValue(5, $_POST['id']);   
-						$stm->execute(); 
-						
-						
-					} catch(PDOException $erro){
-						echo $erro->getMessage(); 
-					}
-					
-				
-				$linkRedireciona = "bannersColunista.php?id_colunista={$_POST['id_colunista']}";
-				
-				if($redireciona <> '') {
-					$linkRedireciona = $redireciona;
-				}
-				
-				echo "	<script>
-						window.location='{$linkRedireciona}';
-						</script>";
-						exit; 
-						
-						
-			}
-		}
-		
-		function excluir() {
-			if($_GET['acao'] == 'excluirBannersColunistas') {
-				
-				try{   
-					$sql = "DELETE FROM banners_colunista WHERE id=? ";   
-					$stm = $this->pdo->prepare($sql);   
-					$stm->bindValue(1, $_GET['id']);   
+
+		function editar($redireciona = '')
+		{
+			if (isset($_POST['acao']) && $_POST['acao'] == 'editarBannersColunistas') {
+
+				try {
+					$sql = "UPDATE banners_colunista SET titulo=?, foto=?, id_colunista=?, ordem=? WHERE id=?";
+					$stm = $this->pdo->prepare($sql);
+					$stm->bindValue(1, $_POST['titulo']);
+					$stm->bindValue(2, upload('foto', '../img_conteudos', 'N'));
+					$stm->bindValue(3, $_POST['id_colunista']);
+					$stm->bindValue(4, $_POST['ordem']);
+					$stm->bindValue(5, $_POST['id']);
 					$stm->execute();
-				} catch(PDOException $erro){
-					echo $erro->getMessage(); 
+				} catch (PDOException $erro) {
+					echo $erro->getMessage();
 				}
-				
+
+
+				$linkRedireciona = "bannersColunista.php?id_colunista={$_POST['id_colunista']}";
+
+				if ($redireciona <> '') {
+					$linkRedireciona = $redireciona;
+				}
+
+				echo "	<script>
+						window.location='{$linkRedireciona}';
+						</script>";
+				exit;
+			}
+		}
+
+		function excluir()
+		{
+			if (isset($_POST['acao']) && $_POST['acao'] == 'excluirBannersColunistas') {
+
+				try {
+					$sql = "DELETE FROM banners_colunista WHERE id=? ";
+					$stm = $this->pdo->prepare($sql);
+					$stm->bindValue(1, $_GET['id']);
+					$stm->execute();
+				} catch (PDOException $erro) {
+					echo $erro->getMessage();
+				}
 			}
 		}
 	}
-	
+
 	$BannersColunistasInstanciada = 'S';
 }
