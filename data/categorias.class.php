@@ -4,7 +4,7 @@ if (isset($CategoriasInstanciada)) {
 
 	if (file_exists('Connections/conexao.php')) {
 
-		include('Connections/con-pdo.php');
+		include_once('Connections/con-pdo.php');
 
 		include_once('funcoes.php');
 	} else {
