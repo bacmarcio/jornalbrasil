@@ -1,51 +1,42 @@
-<?php include "header.php"; //print_r($destaque)?>
+<?php include "header.php"; //print_r($destaque)
+?>
 <!-- main-area -->
 <main>
-
     <!-- banner-area -->
     <section class="tgbanner__area">
         <div class="container">
             <div class="tgbanner__grid">
-            
-            <div class="tgbanner__post big-post">
+
+                <div class="tgbanner__post big-post">
                     <div class="tgbanner__thumb tgImage__hover">
-                        <a href="#"><img src="img_conteudos/<?php echo $destaque[0]->foto?>" alt="img"></a>
+                        <a href="#"><img src="img_conteudos/<?php echo $destaque[0]->foto ?>" alt="img"></a>
                     </div>
                     <div class="tgbanner__content">
                         <ul class="tgbanner__content-meta list-wrap">
-                            <li class="category"><a href="#"><?php echo $destaque[0]->categoria?></a></li>
-                            <li><span class="by">Por</span> <a href="#"><?php echo $destaque[0]->autor_da_materia?></a></li>
-                            <li><?php echo $destaque[0]->data?></li>
+                            <li class="category"><a href="#"><?php echo $catDestaque->titulo; ?></a></li>
+                            <li><span class="by">Por</span> <a href="#"><?php echo $destaque[0]->autor_da_materia ?></a></li>
+                            <li><?php echo $destaque[0]->data; ?></li>
                         </ul>
-                        <h2 class="title tgcommon__hover"><a href="blog-details.html"><?php echo $destaque[0]->titulo?></a></h2>
+                        <h2 class="title tgcommon__hover"><a href="#"><?php echo $destaque[0]->titulo ?></a></h2>
                     </div>
                 </div>
-                <?php //}?>
+
                 <div class="tgbanner__side-post">
-                    <div class="tgbanner__post small-post">
-                        <div class="tgbanner__thumb tgImage__hover">
-                            <a href="blog-details.html"><img src="assets/img/blog/blog02.jpg" alt="img"></a>
+                    <?php foreach ($principalDireita as $itemDireita) { ?>
+
+                        <div class="tgbanner__post small-post">
+                            <div class="tgbanner__thumb tgImage__hover">
+                                <a href="#"><img src="img_conteudos/<?php echo $itemDireita->foto ?>" alt="img"></a>
+                            </div>
+                            <div class="tgbanner__content">
+                                <ul class="tgbanner__content-meta list-wrap">
+                                    <li class="category"><a href="blog.html">multiverse</a></li>
+                                </ul>
+                                <h2 class="title tgcommon__hover"><a href="blog-details.html"><?php echo $itemDireita->titulo ?></a></h2>
+                            </div>
                         </div>
-                        <div class="tgbanner__content">
-                            <ul class="tgbanner__content-meta list-wrap">
-                                <li class="category"><a href="blog.html">multiverse</a></li>
-                            </ul>
-                            <h2 class="title tgcommon__hover"><a href="blog-details.html">Together these universes
-                                    comprise everything that exists</a></h2>
-                        </div>
-                    </div>
-                    <div class="tgbanner__post small-post">
-                        <div class="tgbanner__thumb tgImage__hover">
-                            <a href="blog-details.html"><img src="assets/img/blog/blog03.jpg" alt="img"></a>
-                        </div>
-                        <div class="tgbanner__content">
-                            <ul class="tgbanner__content-meta list-wrap">
-                                <li class="category"><a href="blog.html">technology</a></li>
-                            </ul>
-                            <h2 class="title tgcommon__hover"><a href="blog-details.html">Bubble universes or baby black
-                                    hole universes may exist...</a></h2>
-                        </div>
-                    </div>
+                    <?php } ?>
+
                 </div>
             </div>
         </div>
@@ -364,8 +355,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button class="btn" type="submit"><span class="text">Subscribe</span> <i
-                                        class="fas fa-paper-plane"></i></button>
+                                <button class="btn" type="submit"><span class="text">Subscribe</span> <i class="fas fa-paper-plane"></i></button>
                             </form>
                         </div>
                     </div>
@@ -377,4 +367,4 @@
 
 </main>
 <!-- main-area-end -->
-<?php include "footer.php";?>
+<?php include "footer.php"; ?>

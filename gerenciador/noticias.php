@@ -10,7 +10,7 @@ $acesso->restritoGerenciador();
 include('../data/noticias.class.php');
 $noticias = Noticias::getInstance(Conexao::getInstance());
 $noticias->excluir();
-$dadosConteudos = $noticias->rsDados('', 'id DESC', '100');
+$dadosConteudos = $noticias->rsDados('', 'id DESC');
 
 
 ?>

@@ -1,9 +1,12 @@
-<?php 
-    include "includes.php";
-    
-    $headerCategoria = $categorias->rsDados();
-    $destaque = $noticias->rsDados('','1','','','S');
-    $principal = $noticias->rsDados('','','','','', 'S');    
+<?php
+include "includes.php";
+
+$headerCategoria = $categorias->rsDados();
+$destaque = $noticias->rsDados('', '1', '', '', 'S');
+$principal = $noticias->rsDados('', '', '', '', '', 'S');
+$idCat = $destaque[0]->categoria;
+$catDestaque = $categorias->rsDados(1, $idCat);
+$principalDireita = $noticias->rsDados('', '', 2, '', '', 'S');
 ?>
 
 <!doctype html>
@@ -38,7 +41,7 @@
     <meta name="twitter:creator" content="Jornal Brasil" />
     <meta name="twitter:title" content="Jornal Brasil" />
     <meta name="twitter:description" content="
-    <meta property="og:description" content="O Jornal Brasil é um título incontornável no panorama da imprensa brasileira. No Jornal Brasil acompanhe as notícias, os vídeos, os áudios e as infografias de toda a atualidade nacional, internacional e local." />
+    <meta property=" og:description" content="O Jornal Brasil é um título incontornável no panorama da imprensa brasileira. No Jornal Brasil acompanhe as notícias, os vídeos, os áudios e as infografias de toda a atualidade nacional, internacional e local." />
     <meta name="twitter:image" content="https://www.jornalbrasil.com.br/img/logo.png" />
     <meta property="fb:pages" content="" />
     <meta name="google" content="notranslate" />
@@ -84,7 +87,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-md-6 col-sm-6 order-2 order-lg-0">
-                        
+
                     </div>
                     <div class="col-lg-4 col-md-3 order-0 order-lg-2 d-none d-md-block">
                         <div class="header__top-logo logo text-lg-center">
@@ -143,11 +146,11 @@
                                                 <li><a href="index-8.html">Home Minimal</a></li>
                                             </ul> -->
                                         </li>
-                                        <?php foreach ($headerCategoria as $itemCat) {?>
-                                            
-                                        <li><a href="#"><?php echo $itemCat->titulo?></a></li>
-                                        
-                                        <?php }?>
+                                        <?php foreach ($headerCategoria as $itemCat) { ?>
+
+                                            <li><a href="#"><?php echo $itemCat->titulo ?></a></li>
+
+                                        <?php } ?>
                                         <!-- <li class="menu-item-has-children"><a href="#">Post Type</a>
                                             <ul class="sub-menu">
                                                 <li><a href="#">Our Blog</a></li>
@@ -166,7 +169,7 @@
                                                 <span class="switcher__btn dark-mode"><i class="flaticon-moon"></i></span>
                                             </nav>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </nav>
@@ -216,14 +219,14 @@
                         <a href="index.html" class="logo-dark"><img src="assets/img/logo/logo.png" alt="Logo"></a>
                         <a href="index.html" class="logo-light"><img src="assets/img/logo/w_logo.png" alt="Logo"></a>
                     </div>
-                    
+
                 </div>
                 <div class="offCanvas__contact">
                     <h4 class="title">Entre em Contato</h4>
                     <ul class="offCanvas__contact-list list-wrap">
                         <li><i class="fas fa-envelope-open"></i><a href="mailto:info@webmail.com">redacao@jornalbrasil.com.br</a></li>
                         <li><i class="fas fa-phone"></i><a href="tel:88899988877">(61)555-5555</a></li>
-                        
+
                     </ul>
                     <ul class="offCanvas__social list-wrap">
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -237,5 +240,5 @@
         <div class="offCanvas__overlay"></div>
         <!-- offCanvas-area-end -->
 
-   </header>
-   <!-- header-area-end -->
+    </header>
+    <!-- header-area-end -->
