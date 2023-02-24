@@ -7,6 +7,7 @@ $principal = $noticias->rsDados('', '', '', '', '', 'S');
 $idCat = $destaque[0]->categoria;
 $catDestaque = $categorias->rsDados(1, $idCat);
 $principalDireita = $noticias->rsDados('', '', 2, '', '', 'S');
+$populares = $noticias->populares('','',5);
 ?>
 
 <!doctype html>

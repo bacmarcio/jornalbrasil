@@ -293,6 +293,116 @@ if (isset($NoticiasInstanciada)) {
 			}
 		}
 
+		function populares($titulo = '', $orderBy = '', $limite = '')
+		{
+
+			/// FILTROS
+
+			$nCampos = 0;
+			$sql = '';
+			$sqlOrdem = '';
+			$sqlLimite = '';
+
+			if (isset($principal)) {
+
+				$sql .= " and tbl_noticias.principal = ?";
+
+				$nCampos++;
+
+				$campo[$nCampos] = $principal;
+			}
+
+
+
+			if (isset($ativo)) {
+
+				$sql .= " and tbl_noticias.ativo = ?";
+
+				$nCampos++;
+
+				$campo[$nCampos] = $ativo;
+			}
+
+			if ($titulo <> '') {
+
+				$sql .= " and (tbl_noticias.titulo like '%{$titulo}%')";
+
+				$nCampos++;
+
+				$campo[$nCampos] = $titulo;
+			}
+
+			/// ORDEM		
+
+			if ($orderBy <> '') {
+
+				$sqlOrdem = " order by {$orderBy}";
+			}
+
+			if ($limite <> '') {
+
+				$sqlLimite = " limit 0,{$limite}";
+			}
+
+			try {
+
+				$sql = "SELECT 
+
+				tbl_noticias.*,
+
+				tbl_categoria.titulo as nomeCategoria 
+
+				FROM 
+
+				tbl_noticias 
+
+				LEFT JOIN categorias as tbl_categoria ON tbl_noticias.categoria = tbl_categoria.id 
+
+				where 
+
+				1=1 $sql and principal = 'N' and destaque = 'N' $sqlOrdem $sqlLimite";
+
+				$stm = $this->pdo->prepare($sql);
+
+				for ($i = 1; $i <= $nCampos; $i++) {
+
+					$stm->bindValue($i, $campo[$i]);
+				}
+
+				if (isset($_GET['busca'])) {
+
+					$stm->bindValue($i, "%{$_GET['busca']}%");
+
+					$i++;
+
+					$stm->bindValue($i, "%{$_GET['busca']}%");
+
+					$i++;
+
+					$stm->bindValue($i, "%{$_GET['busca']}%");
+				}
+
+				$stm->execute();
+
+				$rsDados = $stm->fetchAll(PDO::FETCH_OBJ);
+
+				//print_r($stm);
+
+				//print_r($rsDados);
+
+				if (isset($id) or $limite == 1) {
+
+					return ($rsDados[0]);
+				} else {
+
+					return ($rsDados);
+				}
+			} catch (PDOException $erro) {
+
+				echo $erro->getMessage();
+			}
+		}
+
 		function add($mensagemAlert = '', $redireciona = '')
 		{
 
