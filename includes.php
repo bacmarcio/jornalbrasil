@@ -28,6 +28,12 @@ $banners = Banners::getInstance(Conexao::getInstance());
 include "data/noticias.class.php";
 $noticias = Noticias::getInstance(Conexao::getInstance());
 
+include "data/paginacao.class.php";
+$paginacao = new Paginacao($conexao, 'tbl_noticias', 100, $_GET['pagina'] ?? 1);
+
+// Busca dos registros da página atual
+$registros = $paginacao->getRegistros();
+
 
 
 //define('SITE_URL', 'https://'.$_SERVER['HTTP_HOST'].'/projetos/thailand');

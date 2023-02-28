@@ -1,4 +1,4 @@
-<?php include "header.php"; //print_r($destaque)
+<?php include "header.php";
 ?>
 <!-- main-area -->
 <main>
@@ -22,9 +22,7 @@
                 </div>
 
                 <div class="tgbanner__side-post">
-                    <?php foreach ($principalDireita as $itemDireita) {
-                                   $idCatPrincipalDireita = $itemDireita->categoria; 
-                                   $catPrincipalDireita = $categorias->rsDados(1, $idCatPrincipalDireita);?>
+                    <?php foreach ($principalDireita as $itemDireita) { ?>
 
                         <div class="tgbanner__post small-post">
                             <div class="tgbanner__thumb tgImage__hover">
@@ -32,7 +30,7 @@
                             </div>
                             <div class="tgbanner__content">
                                 <ul class="tgbanner__content-meta list-wrap">
-                                    <li class="category"><a href="#"><?php echo $catPrincipalDireita->titulo ?></a></li>
+                                    <li class="category"><a href="#"><?php echo $itemDireita->nomeCategoria ?></a></li>
                                 </ul>
                                 <h2 class="title tgcommon__hover"><a href="#"><?php echo $itemDireita->titulo ?></a></h2>
                             </div>

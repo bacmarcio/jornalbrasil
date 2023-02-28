@@ -1,13 +1,26 @@
 <?php
 include "includes.php";
 
+$id = '';
+if(isset($_GET['id'])){
+    if(empty($_GET['id'])){
+        header('Location: /');
+    }else{
+        $id = $_GET['id'];        
+    }
+}
+
 $headerCategoria = $categorias->rsDados();
 $destaque = $noticias->rsDados('', '1', '', '', 'S');
 $principal = $noticias->rsDados('', '', '', '', '', 'S');
-$idCat = $destaque[0]->categoria;
-$catDestaque = $categorias->rsDados(1, $idCat);
 $principalDireita = $noticias->rsDados('', '', 2, '', '', 'S');
 $populares = $noticias->populares('','',5);
+
+$descNoticias = $noticias->rsDados($id);
+
+if(isset($descNoticias->id)){
+    $catDesc = $categorias->rsDados(1, $descNoticias->categoria);
+}
 ?>
 
 <!doctype html>
@@ -147,11 +160,14 @@ $populares = $noticias->populares('','',5);
                                                 <li><a href="index-8.html">Home Minimal</a></li>
                                             </ul> -->
                                         </li>
-                                        <?php foreach ($headerCategoria as $itemCat) { ?>
+                                        <?php 
+                                        
+                                            foreach($headerCategoria as $itemHeaderCat) { ?>
 
-                                            <li><a href="#"><?php echo $itemCat->titulo ?></a></li>
+                                                <li><a href="#"><?php echo $itemHeaderCat->titulo ?></a></li>
 
-                                        <?php } ?>
+                                            <?php } ?>
+                                        
                                         <!-- <li class="menu-item-has-children"><a href="#">Post Type</a>
                                             <ul class="sub-menu">
                                                 <li><a href="#">Our Blog</a></li>

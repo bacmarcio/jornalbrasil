@@ -183,8 +183,6 @@ if (isset($NoticiasInstanciada)) {
 			}
 		}
 
-
-
 		function arquivos($titulo = '', $orderBy = '', $limite = '')
 		{
 
@@ -412,7 +410,7 @@ if (isset($NoticiasInstanciada)) {
 
 				try {
 
-					$sql = "INSERT INTO tbl_noticias (titulo, data, noticia, categoria, foto, destaque, desc_foto, audio, autor_da_materia, hora_da_publicacao, ativo, arquivo_pdf, resumo, principal, fonte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					$sql = "INSERT INTO tbl_noticias (titulo, data, noticia, categoria, foto, destaque, desc_foto, audio, autor_da_materia, hora_da_publicacao, ativo, arquivo_pdf, resumo, principal, fonte, embed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 					$stm = $this->pdo->prepare($sql);
 
@@ -445,6 +443,8 @@ if (isset($NoticiasInstanciada)) {
 					$stm->bindValue(14, $_POST['principal']);
 
 					$stm->bindValue(15, $_POST['fonte']);
+
+					$stm->bindValue(16, $_POST['embed']);
 
 					$stm->execute();
 
@@ -488,7 +488,7 @@ if (isset($NoticiasInstanciada)) {
 
 				try {
 
-					$sql = "UPDATE tbl_noticias SET titulo=?, data=?, noticia=?, categoria=?, foto=?, destaque=?, desc_foto=?, audio=?, autor_da_materia=?, hora_da_publicacao=?, ativo=?, arquivo_pdf=?, resumo=?, principal=?, fonte=? WHERE id=?";
+					$sql = "UPDATE tbl_noticias SET titulo=?, data=?, noticia=?, categoria=?, foto=?, destaque=?, desc_foto=?, audio=?, autor_da_materia=?, hora_da_publicacao=?, ativo=?, arquivo_pdf=?, resumo=?, principal=?, fonte=?, embed=? WHERE id=?";
 
 					$stm = $this->pdo->prepare($sql);
 
@@ -521,8 +521,10 @@ if (isset($NoticiasInstanciada)) {
 					$stm->bindValue(14, $_POST['principal']);
 
 					$stm->bindValue(15, $_POST['fonte']);
+					
+					$stm->bindValue(16, $_POST['embed']);
 
-					$stm->bindValue(16, $_POST['id']);
+					$stm->bindValue(17, $_POST['id']);
 
 					$stm->execute();
 				} catch (PDOException $erro) {
@@ -575,12 +577,6 @@ if (isset($NoticiasInstanciada)) {
 			}
 		}
 	}
-
-
-
-
-
-
 
 	$NoticiasInstanciada = 'S';
 }
