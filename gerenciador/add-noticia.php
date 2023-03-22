@@ -1,7 +1,7 @@
 <?php
 include "verifica.php";
 $dadosCategorias = $categorias->rsDados();
-$noticias->add();
+$blogs->add();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

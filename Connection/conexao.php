@@ -1,8 +1,8 @@
 <?php 
 $hostname_conexao = "localhost";
-$database_conexao = "pico_solar";
+$database_conexao = "jornalbrasil";
 $username_conexao = "root";
-$password_conexao = "";
+$password_conexao = "#avs2021#";
 
 global $conn;
 

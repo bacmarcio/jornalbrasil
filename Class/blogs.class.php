@@ -234,7 +234,7 @@ tbl_blog.*,
 						$pastaArquivos = '../img';
 					}
 
-					$sql = "INSERT INTO tbl_blog (foto, titulo, postado_por, conteudo, breve, meta_title, meta_keywords, meta_description, foto1, url_amigavel, descricao_imagem, legenda_imagem, ativo, principal, destque, audio, pdf, embed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					$sql = "INSERT INTO tbl_blog (foto, titulo, postado_por, conteudo, breve, meta_title, meta_keywords, meta_description, foto1, url_amigavel, descricao_imagem, legenda_imagem, ativo, principal, destaque, audio, pdf, embed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 					$stm = $this->pdo->prepare($sql);
 					$stm->bindValue(1, upload('foto', $pastaArquivos, 'N'));
 					$stm->bindValue(2, $titulo);
@@ -260,17 +260,35 @@ tbl_blog.*,
 					if ($redireciona == '') {
 						$redireciona = '.';
 					}
+					
+				} catch (PDOException $erro) {
+					
+					echo $erro->getMessage();
+				}
+
+				try {
+					$sql = "SELECT id FROM tbl_blog WHERE 1=1 and destaque = 'S';";
+					$stm = $this->pdo->prepare($sql);
+					$stm->execute();
+					$rsDestaques = $stm->fetchAll(PDO::FETCH_OBJ);
+					//print_r($rsDestaques);
+
+					if(isset($rsDestaques) && $rsDestaques[0]->id != $ultimoPost){
+						$sql = "UPDATE tbl_blog SET destaque = 'N', principal = 'S' WHERE id != {$ultimoPost}";
+						$stm = $this->pdo->prepare($sql);
+						$stm->execute();
+						
+					}
 				} catch (PDOException $erro) {
 					echo $erro->getMessage();
 				}
-				echo "	<script>
-								window.location='blogs.php';
-								</script>";
+				exit;
+				echo "<script>window.location='noticias.php';</script>";
 				exit;
 			}
 		}
 
-		function editar($redireciona = 'blogs.php')
+		function editar($redireciona = 'noticias.php')
 		{
 			if (isset($_POST['acao']) && $_POST['acao'] == 'editaBlog') {
 

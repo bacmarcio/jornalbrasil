@@ -24,4 +24,4 @@ $categorias = Categorias::getInstance(Conexao::getInstance());
 include "Class/paginacao.class.php";
 $paginacao = Paginacao::getInstance(Conexao::getInstance());
 
-define('SITE_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/projetos/novo-jornal');
+define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/jornalbrasil');

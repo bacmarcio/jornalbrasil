@@ -19,7 +19,6 @@ $outrosBlog = $blogs->rsDados('', 'rand()', '8', '', $descBlog[0]->id);
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<meta name="keywords" content="Responsive, HTML5 Template, Jthemes, One Page, Landing, Medical, Health, Healthcare, Doctor, Clinic, Care, Hospital">	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="description" content="<?php if(isset($descBlog[0]->meta_description) && !empty($descBlog[0]->meta_description)){echo $descBlog[0]->meta_description;}?>"/>
 		<meta name="keywords" content="<?php if(isset($descBlog[0]->meta_keywords) && !empty($descBlog[0]->meta_keywords)){echo $descBlog[0]->meta_keywords;}?>">	
@@ -141,21 +140,19 @@ $outrosBlog = $blogs->rsDados('', 'rand()', '8', '', $descBlog[0]->id);
 	
 		<!-- Custom Script -->		
 		<script src="<?php echo SITE_URL;?>/js/custom.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<script> 
 			new WOW().init();
-$(function () {
-			$("#pesquisa_lateral").autocomplete({
+			$(function () {
+				$("#pesquisa_lateral").autocomplete({
                     source: '<?php echo SITE_URL;?>/proc_pesq_msg.php'
                 });
 
                 $("#pesquisa_lateral").autocomplete( "instance" )._renderItem = function( ul, item ) {
-  return $( "<li class='col-lg-3 col-md-12 col-xs-12 link-list'>" )
-    .data("item.autocomplete", item)
-    .append( "<div style='font-size:20px; background: #f0f0f0;'><a href='<?php echo SITE_URL;?>/blog/"+ item.url_amigavel +"'>"+ item.value + "</a></div>")
-    .appendTo( ul );
-};
+  					return $( "<li class='col-lg-3 col-md-12 col-xs-12 link-list'>" ).data("item.autocomplete", item).append( "<div style='font-size:20px; background: #f0f0f0;'><a href='<?php echo SITE_URL;?>/blog/"+ item.url_amigavel +"'>"+ item.value + "</a></div>")
+    			.appendTo( ul );
+				};
             });
 		</script>
 	</body>

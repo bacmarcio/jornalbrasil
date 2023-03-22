@@ -56,24 +56,29 @@ $populares = $blogs->populares('', '', 5);
         <section class="tgbanner__area">
             <div class="container">
                 <div class="tgbanner__grid">
-
                     <div class="tgbanner__post big-post">
                         <div class="tgbanner__thumb tgImage__hover">
-                            <a href="#"><img src="<?php echo SITE_URL ?>/img/<?php echo $destaque[0]->foto ?>" alt="img"></a>
+                            <a href="#">
+                                <img src="<?php echo SITE_URL ?>/img/<?php if(isset($destaque[0]->foto)&&!empty($destaque[0]->foto)){echo $destaque[0]->foto;} ?>" alt="<?php if (isset($destaque[0]->titulo) && !empty($destaque[0]->titulo)) {echo $destaque[0]->titulo;} ?>">
+                            </a>
                         </div>
                         <div class="tgbanner__content">
                             <ul class="tgbanner__content-meta list-wrap">
-
-                                <li><span class="by">Por</span> <a href="#"><?php echo $destaque[0]->postado_por ?></a></li>
-                                <li><?php echo $destaque[0]->updated_at; ?></li>
+                                <li>
+                                    <span class="by">Por</span> 
+                                    <a href="#"><?php if (isset($destaque[0]->postado_por) && !empty($destaque[0]->postado_por)) {echo $destaque[0]->postado_por;} ?></a>
+                                </li>
+                                <li><?php if (isset($destaque[0]->updated_at) && !empty($destaque[0]->updated_at)) {echo formataData($destaque[0]->updated_at);} ?></li>
                             </ul>
-                            <h2 class="title tgcommon__hover"><a href="<?php echo SITE_URL ?>/blog/<?php echo $destaque[0]->url_amigavel ?>"><?php echo $destaque[0]->titulo ?></a><?php echo $destaque[0]->id ?></h2>
+                            <h2 class="title tgcommon__hover">
+                                <a href="<?php echo SITE_URL ?>/blog/<?php if (isset($destaque[0]->url_amigavel) && !empty($destaque[0]->url_amigavel)) {echo $destaque[0]->url_amigavel;} ?>"><?php if (isset($destaque[0]->titulo) && !empty($destaque[0]->titulo)) {echo $destaque[0]->titulo;} ?>
+                                </a>
+                            </h2>
                         </div>
                     </div>
 
                     <div class="tgbanner__side-post">
                         <?php foreach ($principalDireita as $itemDireita) { ?>
-
                             <div class="tgbanner__post small-post">
                                 <div class="tgbanner__thumb tgImage__hover">
                                     <a href="#"><img src="<?php echo SITE_URL ?>/img/<?php echo $itemDireita->foto ?>" alt="img"></a>
