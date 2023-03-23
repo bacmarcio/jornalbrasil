@@ -1,12 +1,13 @@
 <?php
 include "includes.php";
 
-$page = '';
-if (isset($_GET['page'])) {
-    if (empty($_GET['page'])) {
+$pagina = '';
+
+if (isset($_GET['pagina'])) {
+    if (empty($_GET['pagina'])) {
         header('Location:' . SITE_URL);
     } else {
-        $page = $_GET['page'];
+        $pagina = $_GET['pagina'];
     }
 } else {
     header('Location:' . SITE_URL . '/blog');

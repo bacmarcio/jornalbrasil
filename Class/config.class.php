@@ -45,17 +45,17 @@ if(empty($ConfigSistemaInstanciada)) {
 				$stm = $this->pdo->prepare($sql);
 				$stm->execute();   
 				$rsDados = $stm->fetchAll(PDO::FETCH_OBJ);
-				$this->favicon = $rsDados[0]->favicon;
-				$this->facebook = $rsDados[0]->facebook;
-				$this->twitter = $rsDados[0]->twitter;
-				$this->instagram = $rsDados[0]->instagram;
-				$this->youtube = $rsDados[0]->youtube;
-				$this->linkedln = $rsDados[0]->linkedln;
+				$this->favicon      = $rsDados[0]->favicon;
+				$this->facebook     = $rsDados[0]->facebook;
+				$this->twitter      = $rsDados[0]->twitter;
+				$this->instagram    = $rsDados[0]->instagram;
+				$this->youtube      = $rsDados[0]->youtube;
+				$this->linkedln     = $rsDados[0]->linkedln;
 				$this->nome_empresa = $rsDados[0]->nome_empresa;
-				$this->telefone1 = $rsDados[0]->telefone1;
-				$this->telefone2 = $rsDados[0]->telefone2;
-				$this->email1 = $rsDados[0]->email1;
-				$this->email2 = $rsDados[0]->email2;
+				$this->telefone1    = $rsDados[0]->telefone1;
+				$this->telefone2    = $rsDados[0]->telefone2;
+				$this->email1       = $rsDados[0]->email1;
+				$this->email2       = $rsDados[0]->email2;
 				
 				
 			} catch(PDOException $erro){   

@@ -3,10 +3,10 @@ RewriteEngine On
 # Adicionar o barra (/) no final do endereço URL
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteCond    %{HTTP_HOST} !^\. [NC]
-RewriteRule    ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^\. [NC]
+RewriteRule ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
 AddType application/x-httpd-php .html .htm 
-RewriteCond %{HTTPS} on
+RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 #RewriteCond %{HTTP_HOST} ^www\.(.*)
 #RewriteRule (.*) http://%1/$1 [R=301,L]
@@ -21,7 +21,7 @@ RewriteRule ^blog/([a-zA-Z-0-9-_]+)$ blog-details.php?id=$1
 RewriteRule ^categoria/([a-zA-Z-0-9-_]+)$ blog.php?cat=$1
 RewriteRule ^blog/([a-zA-Z-0-9-_]+)/amp$ desc-blog.php?id=$1&formato=amp
 RewriteRule ^blog$ blog.php
-RewriteRule ^blog-pagina-([0-9]+)$ blog.php?pagina=$1
+RewriteRule ^blog/pagina/([0-9]+)$ blog.php?pagina=$1
 RewriteRule ^contato$ contato.php  
 RewriteRule ^busca$ busca.php
 RewriteRule ^sobre$ sobre.php

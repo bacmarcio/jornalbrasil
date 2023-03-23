@@ -2,8 +2,8 @@
 
 $destaque = $blogs->rsDados('', '', '', '', 'S');
 $principal = $blogs->rsDados();
-$principalDireita = $blogs->rsDados('', '', 2, '', 'S');
-$populares = $blogs->populares('', '', 5);
+$principalDireita = $blogs->rsDados('','id desc','2','S');
+$popular = $blogs->noticiasPopulares('','id DESC','5');
 
 ?>
 <!DOCTYPE html>
@@ -78,16 +78,16 @@ $populares = $blogs->populares('', '', 5);
                     </div>
 
                     <div class="tgbanner__side-post">
-                        <?php foreach ($principalDireita as $itemDireita) { ?>
+                        <?php echo count($principalDireita); foreach ($principalDireita as $itemDireita) { ?>
                             <div class="tgbanner__post small-post">
                                 <div class="tgbanner__thumb tgImage__hover">
-                                    <a href="#"><img src="<?php echo SITE_URL ?>/img/<?php echo $itemDireita->foto ?>" alt="img"></a>
+                                    <a href="#"><img src="<?php echo SITE_URL ?>/img/<?php if (isset($itemDireita->foto) && !empty($itemDireita->foto)) {echo $itemDireita->foto;} ?>" alt="img"></a>
                                 </div>
                                 <div class="tgbanner__content">
                                     <ul class="tgbanner__content-meta list-wrap">
-                                        <li class="category"><a href="#"><?php echo $itemDireita->nomeCategoria ?></a></li>
+                                        <li class="category"><a href="#"><?php if (isset($itemDireita->nomeCategoria) && !empty($itemDireita->nomeCategoria)) {echo $itemDireita->nomeCategoria;} ?></a></li>
                                     </ul>
-                                    <h2 class="title tgcommon__hover"><a href="#"><?php echo $itemDireita->titulo ?></a></h2>
+                                    <h2 class="title tgcommon__hover"><a href="<?php echo SITE_URL ?>/blog/<?php if (isset($itemDireita->url_amigavel) && !empty($itemDireita->url_amigavel)) {echo $itemDireita->url_amigavel;} ?>"><?php if (isset($itemDireita->titulo) && !empty($itemDireita->titulo)) {echo $itemDireita->titulo;} ?></a></h2>
                                 </div>
                             </div>
                         <?php } ?>
@@ -119,30 +119,26 @@ $populares = $blogs->populares('', '', 5);
                 <div class="trending__slider">
                     <div class="swiper-container trending-active">
                         <div class="swiper-wrapper">
-                            <?php foreach ($populares as $itensPopulares) { ?>
-
+                            <?php foreach($popular as $itensPopulares){?>
                                 <div class="swiper-slide">
                                     <div class="trending__post">
                                         <div class="trending__post-thumb tgImage__hover">
                                             <a href="#" class="addWish"><i class="fal fa-heart"></i></a>
                                             <a href="#">
-                                                <img src="<?php echo SITE_URL ?>/img/<?php echo $itensPopulares->foto ?> ">
+                                                <img src="<?php echo SITE_URL ?>/img/<?php if (isset($itensPopulares->foto) && !empty($itensPopulares->foto)) {echo $itensPopulares->foto;} ?> ">
                                             </a>
                                             <span class="is_trend"><i class="fas fa-bolt"></i></span>
                                         </div>
                                         <div class="trending__post-content">
                                             <ul class="tgbanner__content-meta list-wrap">
-                                                <li class="category"><a href="#"><?php echo $itensPopulares->nomeCategoria; ?></a></li>
-                                                <li><span class="by">Por</span> <a href="#"><?php echo $itensPopulares->postado_por; ?></a></li>
+                                                <li class="category"><a href="#"><?php if (isset($itensPopulares->nomeCategoria) && !empty($itensPopulares->nomeCategoria)) {echo $itensPopulares->nomeCategoria;} ?></a></li>
+                                                <li><span class="by">Por</span> <a href="#"><?php if (isset($itensPopulares->postado_por) && !empty($itensPopulares->postado_por)) {echo $itensPopulares->postado_por;} ?></a></li>
                                             </ul>
-                                            <h4 class="title tgcommon__hover"><a href="#"><?php echo $itensPopulares->titulo; ?></a><?php echo $itensPopulares->id; ?></h4>
-
+                                            <h4 class="title tgcommon__hover"><a href="<?php echo SITE_URL ?>/blog/<?php if (isset($itensPopulares->url_amigavel) && !empty($itensPopulares->url_amigavel)) {echo $itensPopulares->url_amigavel;} ?>"><?php if (isset($itensPopulares->titulo) && !empty($itensPopulares->titulo)) {echo $itensPopulares->titulo;} ?></a></h4>
                                         </div>
                                     </div>
                                 </div>
                             <?php } ?>
-
-
                         </div>
                     </div>
                 </div>

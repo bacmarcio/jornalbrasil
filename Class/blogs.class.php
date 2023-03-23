@@ -47,7 +47,7 @@ if (empty($BlogsInstanciada)) {
 			if (!empty($principal)) {
 				$sql .= " and principal = ?";
 				$nCampos++;
-				$campo[$nCampos] = $destaque;
+				$campo[$nCampos] = $principal;
 			}
 			if (!empty($destaque)) {
 				$sql .= " and destaque = ?";
@@ -107,106 +107,52 @@ if (empty($BlogsInstanciada)) {
 			}
 		}
 
-		function populares($titulo = '', $orderBy = '', $limite = '')
+		function noticiasPopulares($id = '', $orderBy = '', $limite = '')
 		{
 
 			/// FILTROS
-
 			$nCampos = 0;
 			$sql = '';
 			$sqlOrdem = '';
 			$sqlLimite = '';
-
-			if (isset($principal)) {
-
-				$sql .= " and tbl_blog.principal = ?";
-
+			if (!empty($id)) {
+				$sql .= " and id = ?";
 				$nCampos++;
-
-				$campo[$nCampos] = $principal;
+				$campo[$nCampos] = $id;
 			}
-
-			if ($titulo <> '') {
-
-				$sql .= " and (tbl_blog.titulo like '%{$titulo}%')";
-
-				$nCampos++;
-
-				$campo[$nCampos] = $titulo;
-			}
-
+			
 			/// ORDEM		
-
-			if ($orderBy <> '') {
-
+			if (!empty($orderBy)) {
 				$sqlOrdem = " order by {$orderBy}";
 			}
 
-			if ($limite <> '') {
-
-				$sqlLimite = " limit 0,{$limite}";
+			if (!empty($limite)) {
+				$sqlLimite = " limit {$limite}";
 			}
 
 			try {
-
-				$sql = "SELECT 
-
-tbl_blog.*,
-
-				tbl_categoria.nome as nomeCategoria 
-
-				FROM 
-
-				tbl_blog 
-
-				LEFT JOIN tbl_categoria as tbl_categoria ON tbl_blog.id_categoria = tbl_categoria.id 
-
-				where 
-
-				1=1 $sql and principal = 'N' and destaque = 'N' $sqlOrdem $sqlLimite";
-
+				$sql = "SELECT tbl_blog.*, tbl_categoria.nome AS nomeCategoria FROM tbl_blog LEFT JOIN tbl_categoria ON tbl_categoria.id = tbl_blog.id_categoria WHERE 1=1 AND tbl_blog.principal = 'N' AND tbl_blog.destaque = 'N' $sqlOrdem $sqlLimite";
 				$stm = $this->pdo->prepare($sql);
 
 				for ($i = 1; $i <= $nCampos; $i++) {
-
 					$stm->bindValue($i, $campo[$i]);
 				}
 
-				if (isset($_GET['busca'])) {
-
-					$stm->bindValue($i, "%{$_GET['busca']}%");
-
-					$i++;
-
-					$stm->bindValue($i, "%{$_GET['busca']}%");
-
-					$i++;
-
-					$stm->bindValue($i, "%{$_GET['busca']}%");
-				}
-
 				$stm->execute();
-
 				$rsDados = $stm->fetchAll(PDO::FETCH_OBJ);
-
-				//print_r($stm);
-
 				//print_r($rsDados);
-
-				if (isset($id) or $limite == 1) {
-
+				if ($id <> '' or $limite == 1) {
 					return ($rsDados[0]);
 				} else {
-
 					return ($rsDados);
 				}
 			} catch (PDOException $erro) {
-
 				echo $erro->getMessage();
 			}
 		}
 
-
+		
+		
 		function add($redireciona = '')
 		{
 			if (isset($_POST['acao']) && $_POST['acao'] == 'addBlog') {
@@ -347,6 +293,7 @@ tbl_blog.*,
 				exit;
 			}
 		}
+
 		function excluir()
 		{
 			if (isset($_GET['acao']) && $_GET['acao'] == 'excluirBlog') {

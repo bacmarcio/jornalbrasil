@@ -139,11 +139,15 @@ date_default_timezone_set('America/Sao_Paulo'); ?>
                                 </div>
                                 <div class="social-links">
                                     <ul class="list-wrap">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <?php if (isset($infoSistema->facebook) && !empty($infoSistema->facebook)) { ?>
+									    <li><a href="<?php echo $infoSistema->facebook; ?>"><i class="fab fa-facebook-f"></i> Facebook </a></li>
+									<?php }?>
+									<?php if (isset($infoSistema->twitter) && !empty($infoSistema->twitter)) { ?>
+									    <li><a href="<?php echo $infoSistema->twitter; ?>"><i class="fab fa-twitter"></i> Twitter </a></li>
+									<?php }?>
+									<?php if (isset($infoSistema->youtube) && !empty($infoSistema->youtube)) { ?>
+									    <li><a href="<?php echo $infoSistema->youtube; ?>"><i class="fab fa-youtube"></i> Youtube </a></li>
+									<?php }?>
                                     </ul>
                                 </div>
                             </nav>
@@ -174,10 +178,15 @@ date_default_timezone_set('America/Sao_Paulo'); ?>
 
                     </ul>
                     <ul class="offCanvas__social list-wrap">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <?php if (isset($infoSistema->facebook) && !empty($infoSistema->facebook)) { ?>
+						<li><a href="<?php echo $infoSistema->facebook; ?>"><i class="fab fa-facebook-f"></i> Facebook </a></li>
+					<?php }?>
+					<?php if (isset($infoSistema->twitter) && !empty($infoSistema->twitter)) { ?>
+						<li><a href="<?php echo $infoSistema->twitter; ?>"><i class="fab fa-twitter"></i> Twitter </a></li>
+					<?php }?>
+					<?php if (isset($infoSistema->youtube) && !empty($infoSistema->youtube)) { ?>
+						<li><a href="<?php echo $infoSistema->youtube; ?>"><i class="fab fa-youtube"></i> Youtube </a></li>
+					<?php }?>
                     </ul>
                 </div>
             </div>
