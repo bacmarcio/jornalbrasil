@@ -1,24 +1,24 @@
 <?php
 include "includes.php";
 
-$pagina = '';
+// $pagina = '';
 
-if (isset($_GET['pagina'])) {
-    if (empty($_GET['pagina'])) {
-        header('Location:' . SITE_URL);
-    } else {
-        $pagina = $_GET['pagina'];
-    }
-} else {
-    header('Location:' . SITE_URL . '/blog');
-}
+// if (isset($_GET['pagina'])) {
+//     if (empty($_GET['pagina'])) {
+//         header('Location:' . SITE_URL);
+//     } else {
+//         $pagina = $_GET['pagina'];
+//     }
+// } else {
+//     header('Location:' . SITE_URL . '/blog');
+// }
 
 $puxaBlogs = $blogs->rsDados();
 
 $outrosBlog = $blogs->rsDados('', 'rand()', '8');
 
-$puxaPagina = $paginacao->cria_itens(3, $page, count($puxaBlogs), SITE_URL);
-list($dados, $html_paginacao) = $paginacao->calcular_paginas();
+// $puxaPagina = $paginacao->cria_itens(3, $pagina, count($puxaBlogs), SITE_URL);
+// list($dados, $html_paginacao) = $paginacao->calcular_paginas();
 // Exibir os dados e o HTML da paginação
 
 ?>

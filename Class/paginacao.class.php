@@ -68,12 +68,13 @@ if (empty($PaginacaoInstanciada)) {
     {
       $dados = array();
 
-      echo $sql = "SELECT * FROM tbl_blog LIMIT :inicio, :quantidade";
+      $sql = "SELECT * FROM tbl_blog LIMIT :inicio, :quantidade";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':inicio', $primeiro_item, PDO::PARAM_INT);
       $stmt->bindValue(':quantidade', $itens_por_pagina, PDO::PARAM_INT);
       $stmt->execute();
       $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      
 
       return $dados;
     }
